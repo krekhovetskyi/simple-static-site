@@ -1,6 +1,6 @@
 const path = require('path');
-const config = require('./site.config');
 const FtpDeploy = require('ftp-deploy');
+const config = require('./site.config');
 
 const ftpDeploy = new FtpDeploy();
 
