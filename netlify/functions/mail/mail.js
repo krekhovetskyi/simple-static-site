@@ -10,8 +10,8 @@ exports.handler = async function sendMail(event) {
   } = event.queryStringParameters;
 
   const msg = {
-    to: 'maskman9@gmail.com',
-    from: 'youremail@website.com',
+    to: email,
+    from: process.env.MAIL_FROM,
     subject: 'Contact Message from Website',
     text: `Message from ${name} with email ${email}: ${message}`,
     html: `Message from ${name} with email ${email}: ${message}`
