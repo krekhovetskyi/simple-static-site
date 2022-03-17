@@ -12,6 +12,7 @@
     "deploy": "node ./config/site.deploy.js"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.6.2",
     "chalk": "^4.1.2",
     "clear": "^0.1.0",
     "enquirer": "^2.3.6",
