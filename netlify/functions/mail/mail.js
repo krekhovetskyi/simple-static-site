@@ -2,6 +2,10 @@ const sendgridMail = require('@sendgrid/mail');
 
 sendgridMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+console.log(process.env.MAIL_FROM);
+
+const {MAIL_FROM} = process.env;
+
 exports.handler = async function sendMail(event) {
   const {
     email,
@@ -9,9 +13,11 @@ exports.handler = async function sendMail(event) {
     message
   } = event.queryStringParameters;
 
+  console.log(process.env.MAIL_FROM);
+
   const msg = {
     to: email,
-    from: process.env.MAIL_FROM,
+    from: MAIL_FROM,
     subject: 'Contact Message from Website',
     text: `Message from ${name} with email ${email}: ${message}`,
     html: `Message from ${name} with email ${email}: ${message}`
