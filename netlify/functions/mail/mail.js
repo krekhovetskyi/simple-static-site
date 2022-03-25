@@ -3,6 +3,9 @@ const sendgridMail = require('@sendgrid/mail');
 sendgridMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.handler = async function sendMail(event) {
+
+  console.log(event);
+
   const {
     name,
     email,
