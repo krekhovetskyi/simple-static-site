@@ -2,28 +2,34 @@ const sendgridMail = require('@sendgrid/mail');
 
 sendgridMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-
 exports.handler = async function sendMail(event) {
   const {
-    email,
     name,
+    email,
     message
-  } = event.queryStringParameters;
+  } = event.body;
 
-  console.log(process.env.MAIL_FROM);
+  const {
+    EMAIL_TO,
+    EMAIL_FROM
+  } = process.env;
 
-  const msg = {
-    to: email,
-    from: process.env.MAIL_FROM,
-    subject: `Contact Message from Website ${new Date().toString()}`,
-    text: `Message from ${name} with email ${email}: ${message}`,
-    html: `Message from ${name} with email ${email}: ${message}`
+  const emailMessage = {
+    to: EMAIL_TO,
+    from: EMAIL_FROM,
+    subject: `Contact Message from user ${email}`,
+    html: `
+    <strong>name</strong>: ${name}</br>,
+    <strong>email</strong>: ${email}</br>,
+    <strong>message</strong>:</br>
+    <p>${message}</p>
+    `
   };
 
-  console.log(msg);
+  console.log(emailMessage);
 
   try {
-    await sendgridMail.send(msg);
+    await sendgridMail.send(emailMessage);
   } catch (error) {
     console.error(error);
 
